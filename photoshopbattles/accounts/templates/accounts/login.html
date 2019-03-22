@@ -1,10 +1,13 @@
 {% extends 'accounts/base_layout.html' %}
 
+{# Crispy Bootstrap form implementation referenced from https://simpleisbetterthancomplex.com/tutorial/2018/08/13/how-to-use-bootstrap-4-forms-with-django.html#}
+{% load crispy_forms_tags %}
+
 {% block container %}
     <h1>Login</h1>
     <form method="POST">
         {% csrf_token %}
-        {{ form }}
-        <input type="submit" />
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-success">Login</button>
     </form>
 {% endblock %}

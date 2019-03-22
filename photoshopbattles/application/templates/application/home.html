@@ -1,9 +1,37 @@
 {% extends 'application/base_layout.html' %}
 
+{% block navbar_after %}
+<div class="jumbotron text-center">
+  <h1>Welcome to Photoshop Battles!</h1>
+  
+</div>
+{% endblock %}
+
 {% block container %}
     <div class="row">
     <div class="col-sm">
-      <h1 class="text-center">Welcome to Photoshop Battles</h1>
+    <h2>
+      Recent Battles
+    </h2>
+    {% if latest_posts %}
+    <ul>
+    {% for post in latest_posts %}
+    <li>
+    {{post.title}}
+    </li>
+    {% for reply in post.reply_set.all %}
+    <ul>
+    <li> 
+    {{reply.title}}
+    </li>
+    {% endfor %}
+    {% endfor %}
+    </uL>
+
+    {% else  %}
+      <p>No posts found.</p>
+    {% endif %}
+      
     </div>
   </div>
 {% endblock %}

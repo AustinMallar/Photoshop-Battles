@@ -1,3 +1,5 @@
+# Basic login/registration authentication forms code referenced from https://github.com/justdjango/Handling-User-Auth
+
 from django import forms
 from django.contrib.auth import (
     authenticate,

@@ -1,4 +1,4 @@
-# Basic login/registration authentication code referenced from https://github.com/justdjango/Handling-User-Auth
+# Basic login/registration authentication views code referenced from https://github.com/justdjango/Handling-User-Auth
 
 from django.shortcuts import render, redirect
 
