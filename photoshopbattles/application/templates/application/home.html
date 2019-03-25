@@ -1,37 +1,21 @@
 {% extends 'application/base_layout.html' %}
 
 {% block navbar_after %}
-<div class="jumbotron text-center">
-  <h1>Welcome to Photoshop Battles!</h1>
-  
-</div>
+
 {% endblock %}
 
 {% block container %}
-    <div class="row">
-    <div class="col-sm">
-    <h2>
-      Recent Battles
-    </h2>
-    {% if latest_posts %}
-    <ul>
-    {% for post in latest_posts %}
-    <li>
-    {{post.title}}
-    </li>
-    {% for reply in post.reply_set.all %}
-    <ul>
-    <li> 
-    {{reply.title}}
-    </li>
-    {% endfor %}
-    {% endfor %}
-    </uL>
 
+    <div class="row justify-content-sm-center">
+    <div class="col-sm-8">
+    {% if latest_posts %}
+    <h3 class="recent-battles-heading">Recent Battles</h3>
+    {% for post in latest_posts %}
+      {% include 'application/post.html' %}
+    {% endfor %}
     {% else  %}
-      <p>No posts found.</p>
+      <h3>No Battles Found</h3>
     {% endif %}
-      
     </div>
   </div>
 {% endblock %}
