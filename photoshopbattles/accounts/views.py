@@ -9,29 +9,9 @@ from django.contrib.auth import (
     logout
 )
 
-from .forms import UserLoginForm, UserRegisterForm
-
-
-def login_view(request):
-    next = request.GET.get('next')
-    form = UserLoginForm(request.POST or None)
-    if form.is_valid():
-        username = form.cleaned_data.get('username')
-        password = form.cleaned_data.get('password')
-        user = authenticate(username=username, password=password)
-        login(request, user)
-        if next:
-            return redirect(next)
-        return redirect('/')
-
-    context = {
-        'form': form,
-    }
-    return render(request, "accounts/login.html", context)
-
+from .forms import UserRegisterForm
 
 def register_view(request):
-    next = request.GET.get('next')
     form = UserRegisterForm(request.POST or None)
     if form.is_valid():
         user = form.save(commit=False)
@@ -40,9 +20,7 @@ def register_view(request):
         user.save()
         new_user = authenticate(username=user.username, password=password)
         login(request, new_user)
-        if next:
-            return redirect(next)
-        return redirect('/')
+        return redirect('/account/two_factor/')
 
     context = {
         'form': form,
