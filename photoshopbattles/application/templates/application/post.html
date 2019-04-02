@@ -8,7 +8,7 @@
   <img class="card-img-bottom" src="media/{{ post.image }}" alt="Card image cap" >
   {% if post.reply_set.all %}
 
-  {% if post.reply_set.count == 1 %}
+  {% if post.reply_set.count >= 1 %}
    <h6 class="reply-heading">{{ post.reply_set.count }} Response</h6>
 
    {# Code for modal taken from the Bootstrap documentation: https://getbootstrap.com/docs/4.0/components/modal/ #}

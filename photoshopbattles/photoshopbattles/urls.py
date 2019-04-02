@@ -11,7 +11,7 @@ urlpatterns = [
     url(r'', include(tf_urls)),
     path('admin/', admin.site.urls),
     path('',include('application.urls',namespace='application')),
-    path('accounts/',include('accounts.urls'))
+    path('account/',include('accounts.urls'))
 ]
 
 if settings.DEBUG:
