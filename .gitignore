@@ -1,2 +1,6 @@
 .vscode/
 virtualenv/
+env/
+photoshopbattles/photoshopbattles/__pycache__/
+photoshopbattles/application/__pycache__/
+photoshopbattles/accounts/__pycache__/
