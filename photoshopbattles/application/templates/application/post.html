@@ -23,6 +23,16 @@
         </div>
       </div>
     </div>
+    <button type="button" class="btn btn-primary reply-button" data-toggle="modal" data-target=".bd-example-modal-md-{{post.id}}-reply">Post Reply</button>
+    <div class="modal fade bd-example-modal-md-{{post.id}}-reply" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          {% for reply in post.reply_set.all %}
+          {% include 'application/upload_reply.html' %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
     {% else%}
     <h5 class="reply-heading">{{ post.reply_set.count }} Responses</h5>
     <div class="modal fade bd-example-modal-md-{{post.id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -30,10 +40,18 @@
         <div class="modal-content">
           {% for reply in post.reply_set.all %}
           {% include 'application/reply.html' %}
+          {% endfor %}
         </div>
       </div>
     </div>
-    {% endfor %}
+    <button type="button" class="btn btn-primary reply-button" data-toggle="modal" data-target=".bd-example-modal-md-{{post.id}}-reply">Post Reply</button>
+    <div class="modal fade bd-example-modal-md-{{post.id}}-reply" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          
+        </div>
+      </div>
+    </div>
     {% endif %}
     {% else %}
     <h5 class="reply-heading">No replies yet..</h5>
