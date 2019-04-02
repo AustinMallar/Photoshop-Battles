@@ -1,8 +1,9 @@
 <div class="reply">
   <div class="card-body">
     <h6 class="card-title">{{reply.user}}</h6>
-    <h3 class="card-title">{{reply.title}}</h6>
-    <p class="card-text"><small class="text-muted">Posted {{reply.pub_date}}</small></p>
+    <h3 class="card-title">{{reply.title}}</h3>
+    <p class="card-text"><small class="text-muted">Posted {{reply.pub_date}}</small> <button type="button" class="btn btn-outline-success like-btn">Like</button></p>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-md-{{post.id}}-reply">Post Reply</button>
   </div>
   <img class="card-img-bottom" src="media/{{ reply.image }}" alt="Card image cap" >
 </div>
