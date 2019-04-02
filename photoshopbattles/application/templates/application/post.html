@@ -1,17 +1,4 @@
 <div class="post">
-<<<<<<< HEAD
-<div class="card">
-  <div class="card-body">
-    <h6 class="card-title username">{{post.user}}</h6>
-    <h3 class="card-title post-title">{{post.title}}</h6>
-    <p class="card-text date-posted"><small class="text-muted">Posted {{post.pub_date}}</small></p>
-  </div>
-  <img class="card-img-bottom" src="media/{{ post.image }}" alt="Card image cap" >
-  {% if post.reply_set.all %}
-
-  {% if post.reply_set.count >= 1 %}
-   <h6 class="reply-heading">{{ post.reply_set.count }} Response</h6>
-=======
   <div class="card">
     <div class="card-body">
       <h6 class="card-title username">{{post.user}}</h6>
@@ -20,7 +7,6 @@
     </div>
     <img class="card-img-bottom" src="media/{{ post.image }}" alt="Card image cap" >
     {% if post.reply_set.all %}
->>>>>>> ee0cc7e9d01c2ee13c82c9603637844bc55f21f7
 
     {% if post.reply_set.count >= 1 %}
     <h6 class="reply-heading">{{ post.reply_set.count }} Response</h6>
