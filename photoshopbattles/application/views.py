@@ -13,3 +13,8 @@ class IndexView(generic.ListView):
         """Return the last five published questions."""
         return Post.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:20]
 
+def leaderboard_view(request):
+    return render(request, 'application/leaderboard.html')
+
+def profile_view(request):
+    return render(request, 'application/profile.html')

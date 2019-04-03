@@ -6,16 +6,16 @@
 
 {% block container %}
 
-    <div class="row justify-content-sm-center">
+  <div class="row justify-content-sm-center">
     <div class="col-sm-8">
-    {% if latest_posts %}
-    <h3 class="recent-battles-heading">Recent Battles</h3>
-    {% for post in latest_posts %}
-      {% include 'application/post.html' %}
-    {% endfor %}
-    {% else  %}
-      <h3>No Battles Found</h3>
-    {% endif %}
+      {% if latest_posts %}
+      <h3 class="recent-battles-heading">Recent Battles</h3>
+      {% for post in latest_posts %}
+        {% include 'application/post.html' %}
+      {% endfor %}
+      {% else  %}
+        <h3>No Battles Found</h3>
+      {% endif %}
     </div>
   </div>
 {% endblock %}
