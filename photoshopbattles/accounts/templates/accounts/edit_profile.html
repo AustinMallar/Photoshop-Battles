@@ -4,7 +4,7 @@
 {% block container %}
     <div class="span3 well">
         <center>
-             <form method="POST">
+             <form method="POST" enctype='multipart/form-data'>
                 {% csrf_token %}
                 {{ form|crispy }}
                 <button type="submit" class="btn btn-success">Update Profile</button>

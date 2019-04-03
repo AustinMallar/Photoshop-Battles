@@ -5,7 +5,7 @@
       <h3 class="card-title post-title">{{post.title}}</h6>
       <p class="card-text date-posted"><small class="text-muted">Posted {{post.pub_date}}</small></p>
     </div>
-    <img class="card-img-bottom" src="media/{{ post.image }}" alt="Card image cap" >
+    <img class="card-img-bottom" src="/media/{{ post.image }}" alt="Card image cap" >
     {% if post.reply_set.all %}
 
     {% if post.reply_set.count >= 1 %}

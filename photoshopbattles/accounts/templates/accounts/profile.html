@@ -1,11 +1,25 @@
 {% extends 'accounts/base_layout.html' %}
 
 {% block container %}
-        <div class="span3 well">
-        <center>
-        <img src="/media/profile_pics/{{profile.image}}" width="140" height="140">
+       
+        <div class="row justify-content-sm-center">
+
+          <div class="col-sm-8">
+          <center>
+          <img src="/media/{{profile.image}}" width="140" height="140">
         <h3>{{user_object.username}}</h3>
         <em>{{profile.bio}}</em>
-		</center>
+        <br><br>
+        {% if user_object.username == user.username %}
+          <a href="/account/edit-profile" class="btn btn-primary btn-md" role="button" aria-disabled="true">Edit Profile</a>
+        {% endif %}
+        </center><br>
+            <h4>Posts by {{user_object.username}}</h4>
+            {% for post in posts_by_user %}
+              {% include 'application/post.html' %}            
+            {% endfor %}
+          </div>
+        </div>
+		
     </div>
 {% endblock %}

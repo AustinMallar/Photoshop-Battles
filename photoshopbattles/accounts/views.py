@@ -14,6 +14,7 @@ from django.contrib.auth import (
 from .forms import UserRegisterForm,EditProfileForm
 from django.contrib.auth.models import User
 from .models import Profile
+from application.models import Post
 
 def register_view(request):
     form = UserRegisterForm(request.POST or None)
@@ -42,21 +43,22 @@ def logout_view(request):
 def profile_view(request, username):
     user_object = get_object_or_404(User, username=username)
     profile = user_object.profile
+    posts_by_user = Post.objects.filter(user=user_object)
     context = {
         'user_object': user_object,
-        'profile': profile
+        'profile': profile,
+        'posts_by_user': posts_by_user
     }
     return render(request, 'accounts/profile.html', context)
 
 @login_required
 def profile_edit_view(request):
-    form = EditProfileForm(request.POST or None)
+    form = EditProfileForm(request.POST or None, request.FILES or None)
     user = request.user
     if form.is_valid():
         
         bio = form.cleaned_data.get('bio')
         image = form.cleaned_data.get('image')
-        print(image)
         user.profile.bio=bio
         user.profile.image=image
         user.profile.save()
