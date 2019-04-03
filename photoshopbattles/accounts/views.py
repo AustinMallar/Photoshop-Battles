@@ -1,7 +1,8 @@
 # Basic login/registration authentication views code referenced from https://github.com/justdjango/Handling-User-Auth
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import generic
+from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth import (
     authenticate,
@@ -10,7 +11,8 @@ from django.contrib.auth import (
     logout
 )
 
-from .forms import UserRegisterForm
+from .forms import UserRegisterForm,EditProfileForm
+from django.contrib.auth.models import User
 from .models import Profile
 
 def register_view(request):
@@ -37,3 +39,31 @@ def logout_view(request):
     logout(request)
     return redirect('/')
 
+def profile_view(request, username):
+    user_object = get_object_or_404(User, username=username)
+    profile = user_object.profile
+    context = {
+        'user_object': user_object,
+        'profile': profile
+    }
+    return render(request, 'accounts/profile.html', context)
+
+@login_required
+def profile_edit_view(request):
+    form = EditProfileForm(request.POST or None)
+    user = request.user
+    if form.is_valid():
+        
+        bio = form.cleaned_data.get('bio')
+        image = form.cleaned_data.get('image')
+        print(image)
+        user.profile.bio=bio
+        user.profile.image=image
+        user.profile.save()
+       
+        return redirect(f'/profile/{user.username}')
+    
+    context = {
+        'form': form,
+    }
+    return render(request, "accounts/edit_profile.html", context)

@@ -1,0 +1,11 @@
+{% extends 'accounts/base_layout.html' %}
+
+{% block container %}
+        <div class="span3 well">
+        <center>
+        <img src="/media/profile_pics/{{profile.image}}" width="140" height="140">
+        <h3>{{user_object.username}}</h3>
+        <em>{{profile.bio}}</em>
+		</center>
+    </div>
+{% endblock %}
