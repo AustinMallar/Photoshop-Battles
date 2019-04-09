@@ -16,7 +16,8 @@
         </center><br>
             <h4>Posts by {{user_object.username}}</h4>
             {% for post in posts_by_user %}
-              {% include 'application/post.html' %}            
+              {% include 'accounts/post.html' %}
+
             {% endfor %}
           </div>
         </div>

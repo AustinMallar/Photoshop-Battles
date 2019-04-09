@@ -28,7 +28,7 @@ def new_post(request):
         
         title = form.cleaned_data.get('title')
         image = form.cleaned_data.get('image')
-        post = Post.objects.create(
+        Post.objects.create(
             title=title,
             image=image,
             user=user,
@@ -51,7 +51,7 @@ def upload_reply(request):
         
         title = form.cleaned_data.get('title')
         image = form.cleaned_data.get('image')
-        reply = Reply.objects.create(
+        Reply.objects.create(
             title=title,
             image=image,
             user=user,

@@ -1,0 +1,58 @@
+<div class="post">
+  <div class="card">
+    <div class="card-body">
+      <h6 class="card-title username">{{post.user}}</h6>
+      <h3 class="card-title post-title">{{post.title}}</h6>
+      <p class="card-text date-posted"><small class="text-muted">Posted {{post.pub_date}}</small></p>
+    </div>
+    <img class="card-img-bottom" src="/media/{{ post.image }}" alt="Card image cap" >
+    {% if post.reply_set.all %}
+
+    {% if post.reply_set.count >= 1 %}
+    <h6 class="reply-heading">{{ post.reply_set.count }} Response</h6>
+
+    {# Code for modal taken from the Bootstrap documentation: https://getbootstrap.com/docs/4.0/components/modal/ #}
+    
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-md-{{post.id}}">View Responses</button>
+    <div class="modal fade bd-example-modal-md-{{post.id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          {% for reply in post.reply_set.all %}
+          {% include 'application/reply.html' %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <button type="button" class="btn btn-danger reply-button" data-toggle="modal" data-target=".bd-example-modal-md-{{post.id}}-reply">Post Reply</button>
+    <div class="modal fade bd-example-modal-md-{{post.id}}-reply" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          {{% include 'accounts/delete_post.html' %}
+        </div>
+      </div>
+    </div>
+    {% else%}
+    <h5 class="reply-heading">{{ post.reply_set.count }} Responses</h5>
+    <div class="modal fade bd-example-modal-md-{{post.id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          {% for reply in post.reply_set.all %}
+          {% include 'application/reply.html' %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    {% else %}
+    <h5 class="reply-heading">No replies yet..</h5>
+    <button type="button" class="btn btn-danger reply-button" data-toggle="modal" data-target=".bd-example-modal-md-{{post.id}}-reply">Delete</button>
+    <div class="modal fade bd-example-modal-md-{{post.id}}-reply" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          {% include 'accounts/delete_post.html' %}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>
