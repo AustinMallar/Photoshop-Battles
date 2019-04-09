@@ -23,6 +23,7 @@
         </div>
       </div>
     </div>
+    {% if user.is_authenticated %}
     <button type="button" class="btn btn-primary reply-button" data-toggle="modal" data-target=".bd-example-modal-md-{{post.id}}-reply">Post Reply</button>
     <div class="modal fade bd-example-modal-md-{{post.id}}-reply" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-md">
@@ -31,6 +32,7 @@
         </div>
       </div>
     </div>
+    {%endif%}
     {% else%}
     <h5 class="reply-heading">{{ post.reply_set.count }} Responses</h5>
     <div class="modal fade bd-example-modal-md-{{post.id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -45,6 +47,7 @@
     {% endif %}
     {% else %}
     <h5 class="reply-heading">No replies yet..</h5>
+    {% if user.is_authenticated %}
     <button type="button" class="btn btn-primary reply-button" data-toggle="modal" data-target=".bd-example-modal-md-{{post.id}}-reply">Post Reply</button>
     <div class="modal fade bd-example-modal-md-{{post.id}}-reply" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-md">
@@ -53,6 +56,7 @@
         </div>
       </div>
     </div>
+    {% endif %}
     {% endif %}
   </div>
 </div>
