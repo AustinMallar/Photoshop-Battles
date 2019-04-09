@@ -1,11 +1,11 @@
 <div class="post">
   <div class="card">
     <div class="card-body">
-      <h6 class="card-title username">{{post.user}}</h6>
+      <h6 class="card-title username"><a href="/profile/{{post.user}}">{{post.user}}</a></h6>
       <h3 class="card-title post-title">{{post.title}}</h6>
       <p class="card-text date-posted"><small class="text-muted">Posted {{post.pub_date}}</small></p>
     </div>
-    <img class="card-img-bottom" src="/media/{{ post.image }}" alt="Card image cap" >
+    <img class="card-img-bottom" src="/media/{{ post.image }}" alt="{{post.title}}" >
     {% if post.reply_set.all %}
 
     {% if post.reply_set.count >= 1 %}
