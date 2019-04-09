@@ -8,14 +8,32 @@
 
   <div class="row justify-content-sm-center">
     <div class="col-sm-8">
-      {% if latest_posts %}
+      {% if posts %}
       <h3 class="recent-battles-heading">Recent Battles</h3>
-      {% for post in latest_posts %}
+      {% for post in posts %}
         {% include 'application/post.html' %}
       {% endfor %}
       {% else  %}
         <h3>No Battles Found</h3>
       {% endif %}
+        <!--  Pagination code referenced from https://docs.djangoproject.com/en/2.2/topics/pagination--> 
+      <div class="pagination">
+        <span class="step-links">
+        {% if posts.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ contacts.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+        </span>
+
+        {% if posts.has_next %}
+            <a href="?page={{ posts.next_page_number }}">next</a>
+            <a href="?page={{ posts.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
     </div>
   </div>
 {% endblock %}

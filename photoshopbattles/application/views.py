@@ -1,5 +1,6 @@
 from django.http import HttpResponseRedirect,HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
+from django.core.paginator import Paginator
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
@@ -33,7 +34,13 @@ def IndexView(request):
     else:
         context = {}
         context['reply_form'] = NewReply()
-        context['latest_posts'] = Post.objects.all()[:20]
+        latest_posts = Post.objects.all().order_by('-pub_date')
+
+        # Pagination code referenced from https://docs.djangoproject.com/en/2.2/topics/pagination/
+        paginator = Paginator(latest_posts, 3)
+        page = request.GET.get('page')
+        posts = paginator.get_page(page)
+        context['posts'] = posts
 
         return render(request, 'application/home.html', context)
 
