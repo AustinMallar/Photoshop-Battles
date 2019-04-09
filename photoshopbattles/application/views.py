@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect,HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
 from django.views import generic
@@ -6,13 +6,36 @@ from django.utils import timezone
 from .models import Post, Reply
 from .forms import NewPost, NewReply
 
-class IndexView(generic.ListView):
-    template_name = 'application/home.html'
-    context_object_name = 'latest_posts'
 
-    def get_queryset(self):
-        """Return the last five published questions."""
-        return Post.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:20]
+def IndexView(request):
+
+    if request.method =='POST':
+        reply_form = NewReply(request.POST or None, request.FILES or None)
+        user = request.user
+
+        if reply_form.is_valid():
+            
+            title = reply_form.cleaned_data.get('title')
+            image = reply_form.cleaned_data.get('image')
+            postID = request.POST.get("postID")
+            post=Post.objects.filter(id=postID)[0]
+            Reply.objects.create(
+                title=title,
+                image=image,
+                user=user,
+                votes=0,
+                post_replying_to=post,
+                pub_date = timezone.now(),
+            )
+        
+            return HttpResponseRedirect('/')
+
+    else:
+        context = {}
+        context['reply_form'] = NewReply()
+        context['latest_posts'] = Post.objects.all()[:20]
+
+        return render(request, 'application/home.html', context)
 
 def leaderboard_view(request):
     return render(request, 'application/leaderboard.html')
@@ -42,28 +65,3 @@ def new_post(request):
     }
 
     return render(request, 'application/new_post.html', context)
-
-def upload_reply(request):
-    form = NewReply(request.POST or None, request.FILES or None)
-    user = request.user
-
-    if form.is_valid():
-        
-        title = form.cleaned_data.get('title')
-        image = form.cleaned_data.get('image')
-        Reply.objects.create(
-            title=title,
-            image=image,
-            user=user,
-            votes=0,
-            post_replying_to=1,
-            pub_date = timezone.now(),
-        )
-       
-        return redirect(f'/')
-    
-    context = {
-        'form': form,
-    }
-
-    return render(request, 'application/upload_reply.html', context)

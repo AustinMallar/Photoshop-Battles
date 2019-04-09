@@ -4,7 +4,8 @@
     <div class="card-body">
              <form method="POST" enctype='multipart/form-data'>
                 {% csrf_token %}
-                {{ form|crispy }}
+                {{ reply_form|crispy }}
+                <input type="hidden" name="postID" value="{{ post.id }}">
                 <button type="submit" class="btn btn-success">Post</button>
              </form>
      </div>
