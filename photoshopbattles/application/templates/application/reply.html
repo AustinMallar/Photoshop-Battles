@@ -3,6 +3,9 @@
     <h6 class="card-title"><a href="/profile/{{reply.user}}">{{reply.user}}</a></h6>
     <h3 class="card-title">{{reply.title}}</h3>
     <p class="card-text"><small class="text-muted">Posted {{reply.pub_date}}</small> <button type="button" class="btn btn-outline-success like-btn">Like</button></p>
+    {% if user == reply.user %}
+        <p class="card-text delete-post"><a href="/delete_reply/{{reply.id}}">Delete Reply</a></p>
+    {% endif %}
   </div>
   <img class="card-img-bottom" src="/media/{{ reply.image }}" alt="{{reply.title}}">
 </div>

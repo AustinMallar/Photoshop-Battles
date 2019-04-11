@@ -72,3 +72,22 @@ def new_post(request):
     }
 
     return render(request, 'application/new_post.html', context)
+
+def delete_post(request,id):
+    user = request.user
+    post = get_object_or_404(Post, pk=id)
+    if user == post.user:
+        post.delete()
+        return HttpResponseRedirect('/')    
+    else:
+        return HttpResponseRedirect('/')
+
+def delete_reply(request,id):
+    user = request.user
+    reply = get_object_or_404(Reply, pk=id)
+    if user == reply.user:
+        reply.delete()
+        return HttpResponseRedirect('/')    
+    else:
+        return HttpResponseRedirect('/')
+    

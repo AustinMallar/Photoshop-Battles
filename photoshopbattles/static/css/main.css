@@ -39,3 +39,7 @@ body {
 .nav-link:hover{ 
     background-color: rgb(42, 41, 41);
 }
+
+.delete-post {
+    font-size: 0.75rem;
+}
