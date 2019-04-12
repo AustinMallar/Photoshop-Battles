@@ -14,7 +14,7 @@ from django.contrib.auth import (
 from .forms import UserRegisterForm,EditProfileForm
 from django.contrib.auth.models import User
 from .models import Profile
-from application.models import Post
+from application.models import Post,Reply
 
 def register_view(request):
     form = UserRegisterForm(request.POST or None)
@@ -44,10 +44,12 @@ def profile_view(request, username):
     user_object = get_object_or_404(User, username=username)
     profile = user_object.profile
     posts_by_user = Post.objects.filter(user=user_object)
+    replies_by_user = Reply.objects.filter(user=user_object)
     context = {
         'user_object': user_object,
         'profile': profile,
-        'posts_by_user': posts_by_user
+        'posts_by_user': posts_by_user,
+        'replies_by_user': replies_by_user
     }
     return render(request, 'accounts/profile.html', context)
 
