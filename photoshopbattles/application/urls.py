@@ -10,5 +10,4 @@ urlpatterns = [
     path('new_post', new_post),
     path('delete_post/<int:id>',delete_post),
     path('delete_reply/<int:id>',delete_reply)
-    
 ]
