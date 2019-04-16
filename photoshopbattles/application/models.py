@@ -22,7 +22,13 @@ class Reply(models.Model):
     votes = models.IntegerField(default=0)
     pub_date = models.DateTimeField('date published')
 
-
     def __str__(self):
         return self.title
+
+class Liked(models.Model):
+    reply = models.ForeignKey(Reply, on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return self.reply
 

@@ -3,6 +3,8 @@
 from django import forms
 from .models import Post
 from .models import Reply
+from .models import Liked
+
 from django.contrib.auth import (
     authenticate,
     get_user_model

@@ -2,9 +2,14 @@
   <div class="card-body">
     <h6 class="card-title"><a href="/profile/{{reply.user}}">{{reply.user}}</a></h6>
     <h3 class="card-title">{{reply.title}}</h3>
-    <p class="card-text"><small class="text-muted">Posted {{reply.pub_date}}</small> 
+    <p class="card-text"><small class="text-muted">Posted {{reply.pub_date}}</small> </p>
+    <p class="card-text">{{ reply.liked_set.count }} Likes {{ liked_by_user.count }}
     {% if user != reply.user %}
-    <button type="button" class="btn btn-outline-success like-btn">Like</button></p>
+    {% if reply in liked_by_user %}
+      <a href="/unlike_reply/{{liked.id}}"><button type="button" class="btn btn-success like-btn">Liked</button></a></p>
+    {% else %}
+      <a href="/like_reply/{{reply.id}}"><button type="button" class="btn btn-outline-success like-btn">Like</button></a></p>
+    {% endif %}
     {% endif %}
     {% if user == reply.user %}
         <a href="/delete_reply/{{reply.id}}"><button type="button" class="btn btn-danger like-btn">Delete Reply</button></a></p>

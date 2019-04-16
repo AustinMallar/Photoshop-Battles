@@ -4,7 +4,7 @@ from django.core.paginator import Paginator
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
-from .models import Post, Reply
+from .models import Post, Reply, Liked
 from .forms import NewPost, NewReply
 
 
@@ -37,7 +37,7 @@ def IndexView(request):
         latest_posts = Post.objects.all().order_by('-pub_date')
 
         # Pagination code referenced from https://docs.djangoproject.com/en/2.2/topics/pagination/
-        paginator = Paginator(latest_posts, 3)
+        paginator = Paginator(latest_posts, 10)
         page = request.GET.get('page')
         posts = paginator.get_page(page)
         context['posts'] = posts
@@ -91,3 +91,20 @@ def delete_reply(request,id):
     else:
         return HttpResponseRedirect('/')
     
+def like_reply(request, id):
+    user = request.user
+    reply = get_object_or_404(Reply, pk=id)
+    Liked.objects.create(
+        user = user,
+        reply = reply,
+    )
+    return HttpResponseRedirect('/')
+
+def unlike_reply(request, id):
+    user = request.user
+    liked = get_object_or_404(Liked, pk=id)
+    if user == liked.user:
+        liked.delete()
+        return HttpResponseRedirect('/')    
+    else:
+        return HttpResponseRedirect('/')
