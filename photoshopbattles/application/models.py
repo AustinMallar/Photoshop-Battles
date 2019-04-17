@@ -25,10 +25,15 @@ class Reply(models.Model):
     def __str__(self):
         return self.title
 
+    def like_list(self):
+        liked_list = []
+        for u in self.liked_set.all():
+            liked_list.append(u.user.username)
+        return liked_list
+
 class Liked(models.Model):
     reply = models.ForeignKey(Reply, on_delete=models.CASCADE)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     
-    def __str__(self):
-        return self.reply
+
 

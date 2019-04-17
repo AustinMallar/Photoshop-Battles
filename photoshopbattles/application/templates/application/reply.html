@@ -5,7 +5,7 @@
     <p class="card-text"><small class="text-muted">Posted {{reply.pub_date}}</small> </p>
     <p class="card-text">{{ reply.liked_set.count }} Likes {{ liked_by_user.count }}
     {% if user != reply.user %}
-    {% if reply in liked_by_user %}
+    {% if user.username in reply.like_list %}
       <a href="/unlike_reply/{{liked.id}}"><button type="button" class="btn btn-success like-btn">Liked</button></a></p>
     {% else %}
       <a href="/like_reply/{{reply.id}}"><button type="button" class="btn btn-outline-success like-btn">Like</button></a></p>
