@@ -102,8 +102,9 @@ def like_reply(request, id):
 
 def unlike_reply(request, id):
     user = request.user
-    liked = get_object_or_404(Liked, pk=id)
-    if user == liked.user:
+    reply = get_object_or_404(Reply, pk=id)
+    liked = reply.liked_set.get(user=user)
+    if liked:
         liked.delete()
         return HttpResponseRedirect('/')    
     else:
