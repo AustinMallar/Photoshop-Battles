@@ -1,4 +1,4 @@
-heat_template_version: 2019-04-07
+heat_template_version: 2014-10-16
 
 description: Template that creates a deployment server running NGINX+UWSGI with an ngrok tunnel so the application is available on a public URL, and a Jenkins CI server.
 
@@ -196,12 +196,10 @@ resources:
             # Install the new crontab.
             - sudo crontab mycron
 
-            # Move to project directory and start up uwsgi 
+            # Move to project directory and start up uwsgi and Start ngrok tunnel
             - cd /code/photoshopbattles
-            - sudo uwsgi --disable-logging --socket photoshopbattles.sock --module photoshopbattles.wsgi --chmod-socket=666 
-            # Start ngrok tunnel
-            - sudo /code/ngrok authtoken 2DXgSYkoB8Vk7ZmYJfmrs_7SWpCNhZVDzN9hdxqPcUJ
-            - sudo /code/ngrok http 80
+            - sudo uwsgi --disable-logging --socket photoshopbattles.sock --module photoshopbattles.wsgi --chmod-socket=666 && sudo /code/ngrok authtoken 2DXgSYkoB8Vk7ZmYJfmrs_7SWpCNhZVDzN9hdxqPcUJ && sudo /code/ngrok http 80
+        
           params:
             $SETUP_RUNCMD_URL: {get_param: setup_runcmd_url }
             $DEPLOY_REPOSITORY: {get_param: deploy_repository }
@@ -294,14 +292,15 @@ resources:
                     keyserver: ha.pool.sks-keyservers.net
 
               runcmd:
-              # set permissions in case write_files above created .ssh
-              - sudo apt-get update
+              # Update and Upgrade 
+              - sudo apt-get update -y
+              - sudo apt-get upgrade -y
               # Install Docker
               - sudo apt install apt-transport-https ca-certificates curl software-properties-common
               - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
               - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-              - sudo apt update
-              - sudo apt install docker-ce
+              - sudo apt update -y
+              - sudo apt install docker-ce -y
               # Start up Jenkins container
               - docker run -d -v jenkins_home:/var/jenkins_home -p 8080:8080 -p 50000:50000 jenkins/jenkins:lts
 
