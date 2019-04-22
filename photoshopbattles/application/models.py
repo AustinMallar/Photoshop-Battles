@@ -12,14 +12,15 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+    
 
+    
 
 class Reply(models.Model):
     title=models.CharField(max_length=40)
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     post_replying_to=models.ForeignKey(Post,on_delete=models.CASCADE)
     image = models.ImageField(upload_to='reply_pictures')
-    votes = models.IntegerField(default=0)
     pub_date = models.DateTimeField('date published')
 
     def __str__(self):
@@ -34,6 +35,8 @@ class Reply(models.Model):
 class Liked(models.Model):
     reply = models.ForeignKey(Reply, on_delete=models.CASCADE)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
+
+    
     
 
 

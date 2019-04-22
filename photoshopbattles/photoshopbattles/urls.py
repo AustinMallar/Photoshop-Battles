@@ -6,6 +6,9 @@ from two_factor.urls import urlpatterns as tf_urls
 from django.conf.urls import url
 from two_factor.gateways.twilio.urls import urlpatterns as tf_twilio_urls
 
+#Custom admin page header
+admin.site.site_header = 'Photoshop Battles Admin'
+
 urlpatterns = [
     url(r'', include(tf_twilio_urls)),
     url(r'', include(tf_urls)),
