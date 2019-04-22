@@ -3,7 +3,7 @@
     <div class="card-body">
       <h6 class="card-title username"><a href="/profile/{{post.user}}">{{post.user}}</a></h6>
       <h3 class="card-title post-title">{{post.title}}</h6>
-      <p class="card-text date-posted post-date"><small class="text-muted">Posted {{post.pub_date}}</small></p>
+      <p class="card-text date-posted post-date"><small class="text-muted">Posted {{post.pub_date}}</small></p>  
       {% if user == post.user %}
         <a href="/delete_post/{{post.id}}">
           <button type="button" class="btn btn-danger like-btn">

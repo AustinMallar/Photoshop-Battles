@@ -2,8 +2,6 @@
 
 A Django web application where users can submit photos to be photoshopped by other users. Photoshops will be voted on to determine the winner.
 
-The publicly available URL for this project is http://add34812.ngrok.io/
-
 ## Authors
 
 * **Austin Mallar**

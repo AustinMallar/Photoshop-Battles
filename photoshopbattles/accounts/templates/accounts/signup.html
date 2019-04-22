@@ -3,7 +3,8 @@
 {% load crispy_forms_tags %}
 
 {% block container %}
-    <h1>Register</h1>
+    <br>
+    <h2>Register</h2>
     <form method="POST">
         {% csrf_token %}
         {{ form|crispy }}
