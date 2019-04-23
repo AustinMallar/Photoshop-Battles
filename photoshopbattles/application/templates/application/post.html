@@ -3,7 +3,7 @@
     <div class="card-body">
       <h6 class="card-title username"><a href="/profile/{{post.user}}">{{post.user}}</a></h6>
       <h3 class="card-title post-title">{{post.title}}</h6>
-      <p class="card-text date-posted post-date"><small class="text-muted">Posted {{post.pub_date}}</small></p>  
+      <p class="card-text date-posted post-date"><small class="text-muted">Posted {{post.pub_date}}</small></p>
       {% if user == post.user %}
         <a href="/delete_post/{{post.id}}">
           <button type="button" class="btn btn-danger like-btn">
@@ -20,7 +20,7 @@
     {% if post.reply_set.all %}
 
     {% if post.reply_set.count >= 1 %}
-    <h6 class="reply-heading">{{ post.reply_set.count }} Response</h6>
+    <h6 class="reply-heading">{{ post.reply_set.count }} Responses</h6>
 
     {# Code for modal taken from the Bootstrap documentation: https://getbootstrap.com/docs/4.0/components/modal/ #}
     
