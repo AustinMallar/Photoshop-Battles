@@ -1,50 +1,46 @@
 {% extends 'accounts/base_layout.html' %}
 
 {% block container %}
-       
-        <div class="row justify-content-sm-center">
-
-          <div class="col-sm-8">
-          <center>
-          <img src="/media/{{profile.image}}" width="140" height="140">
-        <h3>{{user_object.username}}</h3>
-        <em>{{profile.bio}}</em>
-        <br><br>
-        {% if user_object.username == user.username %}
-          <a href="/account/edit-profile" class="btn btn-primary btn-md" role="button" aria-disabled="true">Edit Profile</a>
-        {% endif %}
-        </center><br>
-            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-  <li class="nav-item">
-    <a class="nav-link active" id="pills-posts-tab" data-toggle="pill" href="#pills-posts" role="tab" aria-controls="pills-posts" aria-selected="true">Posts</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" id="pills-replies-tab" data-toggle="pill" href="#pills-replies" role="tab" aria-controls="pills-replies" aria-selected="false">Replies</a>
-  </li>
-  <li class="nav-item">
-      <a class="nav-link" id="pills-favourites-tab" data-toggle="pill" href="#pills-favourites" role="tab" aria-controls="pills-favourites" aria-selected="false">Favourites</a>
-    </li>
-</ul>
-<div class="tab-content" id="pills-tabContent">
-  <div class="tab-pane fade show active" id="pills-posts" role="tabpanel" aria-labelledby="pills-posts-tab"> 
-             {% for post in posts_by_user %}
-              {% include 'application/post.html' %}
-            {% endfor %}
-  </div>
-  <div class="tab-pane fade" id="pills-replies" role="tabpanel" aria-labelledby="pills-replies-tab">
-            {% for reply in replies_by_user %}
-              {% include 'application/reply.html' %}
-            {% endfor %}
-  </div>
-  <div class="tab-pane fade" id="pills-favourites" role="tabpanel" aria-labelledby="pills-favourites-tab">
-      {% for reply in replies_favourited %}
-        {% include 'application/reply.html' %}
-      {% endfor %}
-</div>
-</div>
-
-          </div>
-        </div>
-		
+<div class="row justify-content-sm-center">
+    <div class="col-sm-8">
+        <center>
+            <img src="/media/{{profile.image}}" width="140" height="140">
+            <h3>{{user_object.username}}</h3>
+            <em>{{profile.bio}}</em>
+            <br><br>
+            {% if user_object.username == user.username %}
+            <a href="/account/edit-profile" class="btn btn-primary btn-md" role="button" aria-disabled="true">Edit Profile</a>
+            {% endif %}
+       </center><br>
+       <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+           <li class="nav-item">
+               <a class="nav-link active" id="pills-posts-tab" data-toggle="pill" href="#pills-posts" role="tab" aria-controls="pills-posts" aria-selected="true">Posts</a>
+           </li>
+           <li class="nav-item">
+               <a class="nav-link" id="pills-replies-tab" data-toggle="pill" href="#pills-replies" role="tab" aria-controls="pills-replies" aria-selected="false">Replies</a>
+           </li>
+           <li class="nav-item">
+               <a class="nav-link" id="pills-favourites-tab" data-toggle="pill" href="#pills-favourites" role="tab" aria-controls="pills-favourites" aria-selected="false">Favourites</a>
+           </li>
+       </ul>
+    <div class="tab-content" id="pills-tabContent">
+       <div class="tab-pane fade show active" id="pills-posts" role="tabpanel" aria-labelledby="pills-posts-tab"> 
+           {% for post in posts_by_user %}
+           {% include 'application/post.html' %}
+           {% endfor %}
+       </div>
+       <div class="tab-pane fade" id="pills-replies" role="tabpanel" aria-labelledby="pills-replies-tab">
+           {% for reply in replies_by_user %}
+           {% include 'application/reply.html' %}
+           {% endfor %}
+       </div>
+       <div class="tab-pane fade" id="pills-favourites" role="tabpanel" aria-labelledby="pills-favourites-tab">
+           {% for reply in replies_favourited %}
+           {% include 'application/reply.html' %}
+           {% endfor %}
+       </div>
     </div>
+    </div>
+    </div>
+</div>
 {% endblock %}
