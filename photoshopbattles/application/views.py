@@ -47,14 +47,15 @@ def IndexView(request):
 def leaderboard_view(request):
     context = {}   
     latest_Profiles = Profile.objects.all()[:3]
+    # Code for sorting list of objects https://stackoverflow.com/questions/403421/how-to-sort-a-list-of-objects-based-on-an-attribute-of-the-objects
+    sorted_profiles = sorted(latest_Profiles, key=lambda x: x.total_number_likes(), reverse=True)
+
+
     #Sorting code referenced from https://stackoverflow.com/questions/2501149/order-by-count-of-a-foreignkey-field
     top_replies = Reply.objects.annotate(num_likes = Count('liked')).order_by('-num_likes')[:3]
     context['replies'] = top_replies
-    context['profiles'] = latest_Profiles
+    context['profiles'] = sorted_profiles
     return render(request, 'application/leaderboard.html', context)
-
-def profile_view(request):
-    return render(request, 'application/profile.html')
 
 def new_post(request):
     form = NewPost(request.POST or None, request.FILES or None)
@@ -133,4 +134,4 @@ def unfavourite_reply(request, id):
         favourite.delete()
         return HttpResponse(200)    
     else:
-        return HttpResponseRedirect(301)
+        return HttpResponseRedirect(400)
