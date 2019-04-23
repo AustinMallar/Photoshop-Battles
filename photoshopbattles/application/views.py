@@ -7,6 +7,7 @@ from django.utils import timezone
 from .models import Post, Reply, Liked, Favourite
 from .forms import NewPost, NewReply
 from accounts.models import Profile
+from django.db.models import Count
 
 def IndexView(request):
 
@@ -44,10 +45,11 @@ def IndexView(request):
         return render(request, 'application/home.html', context)
 
 def leaderboard_view(request):
-    context = {}
-    latest_replies = Reply.objects.all().order_by('-pub_date')[:3]
-    context['replies'] = latest_replies
+    context = {}   
     latest_Profiles = Profile.objects.all()[:3]
+    #Sorting code referenced from https://stackoverflow.com/questions/2501149/order-by-count-of-a-foreignkey-field
+    top_replies = Reply.objects.annotate(num_likes = Count('liked')).order_by('-num_likes')[:3]
+    context['replies'] = top_replies
     context['profiles'] = latest_Profiles
     return render(request, 'application/leaderboard.html', context)
 
