@@ -107,4 +107,4 @@ def unlike_reply(request, id):
         liked.delete()
         return JsonResponse({'likes': int(reply.liked_set.count())})
     else:
-        return JsonResponse({'likes': int(reply.liked_set.count())})
+        return JsonResponse({'likes':int(reply.liked_set.count())})

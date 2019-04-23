@@ -31,11 +31,20 @@ class Reply(models.Model):
         for u in self.liked_set.all():
             liked_list.append(u.user.username)
         return liked_list
+    
+    def favourite_list(self):
+        favourite_list = []
+        for u in self.favourite_set.all():
+            favourite_list.append(u.user.username)
+        return favourite_list
 
 class Liked(models.Model):
     reply = models.ForeignKey(Reply, on_delete=models.CASCADE)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
 
+class Favourite(models.Model):
+    reply = models.ForeignKey(Reply, on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
     
     
 
