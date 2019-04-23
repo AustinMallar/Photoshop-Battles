@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect,HttpResponse
+from django.http import HttpResponseRedirect,HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.core.paginator import Paginator
 from django.urls import reverse
@@ -24,7 +24,6 @@ def IndexView(request):
                 title=title,
                 image=image,
                 user=user,
-                votes=0,
                 post_replying_to=post,
                 pub_date = timezone.now(),
             )
@@ -37,7 +36,7 @@ def IndexView(request):
         latest_posts = Post.objects.all().order_by('-pub_date')
 
         # Pagination code referenced from https://docs.djangoproject.com/en/2.2/topics/pagination/
-        paginator = Paginator(latest_posts, 10)
+        paginator = Paginator(latest_posts, 5)
         page = request.GET.get('page')
         posts = paginator.get_page(page)
         context['posts'] = posts
@@ -98,7 +97,7 @@ def like_reply(request, id):
         user = user,
         reply = reply,
     )
-    return HttpResponseRedirect('/')
+    return JsonResponse({'likes': int(reply.liked_set.count())})
 
 def unlike_reply(request, id):
     user = request.user
@@ -106,6 +105,6 @@ def unlike_reply(request, id):
     liked = reply.liked_set.get(user=user)
     if liked:
         liked.delete()
-        return HttpResponseRedirect('/')    
+        return JsonResponse({'likes': int(reply.liked_set.count())})
     else:
-        return HttpResponseRedirect('/')
+        return JsonResponse({'likes': int(reply.liked_set.count())})

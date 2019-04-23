@@ -3,17 +3,17 @@
     <h6 class="card-title"><a href="/profile/{{reply.user}}">{{reply.user}}</a></h6>
     <h3 class="card-title">{{reply.title}}</h3>
     <p class="card-text"><small class="text-muted">Posted {{reply.pub_date}}</small> </p>
-    <p class="card-text">{{ reply.liked_set.count }} Likes {{ liked_by_user.count }}
+    <p class="card-text"><span id="likecount{{reply.id}}">{{ reply.liked_set.count }}</span> Likes {{ liked_by_user.count }}
     {% if user.is_authenticated %}
     {% if user != reply.user %}
     {% if user.username in reply.like_list %}
-      <a href="/unlike_reply/{{reply.id}}"><button type="button" class="btn btn-success like-btn">Liked</button></a></p>
+      <button id="unlikebutton{{reply.id}}" onclick="unlike_reply({{reply.id}})" type="button" class="btn btn-success like-btn">Liked</button>
     {% else %}
-      <a href="/like_reply/{{reply.id}}"><button type="button" class="btn btn-outline-success like-btn">Like</button></a></p>
+      <button id="likebutton{{reply.id}}" onclick="like_reply({{reply.id}})" type="button" class="btn btn-outline-success like-btn">Like</button>
     {% endif %}
     {% endif %}
     {% if user == reply.user %}
-        <a href="/delete_reply/{{reply.id}}"><button type="button" class="btn btn-danger like-btn">Delete Reply</button></a></p>
+        <a href="/delete_reply/{{reply.id}}"><button type="button" class="btn btn-danger like-btn">Delete Reply</button></a>
     {% endif %}
     {% endif %}
   </div>
