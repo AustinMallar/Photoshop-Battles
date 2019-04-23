@@ -7,9 +7,9 @@
     {% if user.is_authenticated %}
     {% if user != reply.user %}
     {% if user.username in reply.favourite_list %}
-      <a href="/unfavourite_reply/{{reply.id}}"><button type="button" class="btn btn-warning like-btn">Favourited</button></a>
+      <button id="unfavouritebutton{{reply.id}}" onclick="unfavourite({{reply.id}})" type="button" class="btn btn-warning like-btn">Favourited</button>
     {% else %}
-      <a href="/favourite_reply/{{reply.id}}"><button type="button" class="btn btn-outline-warning like-btn">Favourite?</button></a>
+     <button id="favouritebutton{{reply.id}}" onclick="favourite({{reply.id}})" type="button" class="btn btn-outline-warning like-btn">Favourite?</button>
     {% endif %}
     {% if user.username in reply.like_list %}
       <button id="unlikebutton{{reply.id}}" onclick="unlike_reply({{reply.id}})" type="button" class="btn btn-success like-btn">Liked</button>

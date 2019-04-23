@@ -93,6 +93,34 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script>
+                  function favourite(id) {
+              $.ajax({
+                method: "GET",
+                url: `/favourite_reply/${id}`,
+                success: function(data) {
+                $(`#favouritebutton${id}`).removeClass('btn-outline-warning')
+                $(`#favouritebutton${id}`).addClass('btn-warning')
+                $(`#favouritebutton${id}`).html("Favourited")
+                $(`#favouritebutton${id}`).attr("onclick",`unfavourite(${id})`)
+                $(`#favouritebutton${id}`).attr("id",`unfavouritebutton${id}`)
+                }
+              })
+            };
+
+            function unfavourite(id) {
+              $.ajax({
+                method: "GET",
+                url: `/unfavourite_reply/${id}`,
+                success: function(data) {
+                $(`#unfavouritebutton${id}`).removeClass('btn-warning')
+                $(`#unfavouritebutton${id}`).addClass('btn-outline-warning')
+                $(`#unfavouritebutton${id}`).html("Favourite?")
+                $(`#unfavouritebutton${id}`).attr("onclick",`favourite(${id})`)
+                $(`#unfavouritebutton${id}`).attr("id",`favouritebutton${id}`)
+                }
+              })
+            };
+
           function like_reply(id) {
               $.ajax({
                 method: "GET",

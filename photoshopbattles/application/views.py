@@ -116,7 +116,7 @@ def favourite_reply(request, id):
         user = user,
         reply = reply,
     )
-    return HttpResponseRedirect('/')
+    return HttpResponse(200)
 
 def unfavourite_reply(request, id):
     user = request.user
@@ -124,6 +124,6 @@ def unfavourite_reply(request, id):
     favourite = reply.favourite_set.get(user=user)
     if favourite:
         favourite.delete()
-        return HttpResponseRedirect('/')    
+        return HttpResponse(200)    
     else:
-        return HttpResponseRedirect('/')
+        return HttpResponseRedirect(301)

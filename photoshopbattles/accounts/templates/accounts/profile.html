@@ -37,7 +37,7 @@
             {% endfor %}
   </div>
   <div class="tab-pane fade" id="pills-favourites" role="tabpanel" aria-labelledby="pills-favourites-tab">
-      {% for reply in favourited_by_user.reply_set.all %}
+      {% for reply in replies_favourited %}
         {% include 'application/reply.html' %}
       {% endfor %}
 </div>
