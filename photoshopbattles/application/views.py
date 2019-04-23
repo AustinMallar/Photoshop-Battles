@@ -4,7 +4,7 @@ from django.core.paginator import Paginator
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
-from .models import Post, Reply, Liked
+from .models import Post, Reply, Liked, Favourite
 from .forms import NewPost, NewReply
 
 
@@ -106,6 +106,25 @@ def unlike_reply(request, id):
     liked = reply.liked_set.get(user=user)
     if liked:
         liked.delete()
+        return HttpResponseRedirect('/')    
+    else:
+        return HttpResponseRedirect('/')
+
+def favourite_reply(request, id):
+    user = request.user
+    reply = get_object_or_404(Reply, pk=id)
+    Favourite.objects.create(
+        user = user,
+        reply = reply,
+    )
+    return HttpResponseRedirect('/')
+
+def unfavourite_reply(request, id):
+    user = request.user
+    reply = get_object_or_404(Reply, pk=id)
+    favourite = reply.favourite_set.get(user=user)
+    if favourite:
+        favourite.delete()
         return HttpResponseRedirect('/')    
     else:
         return HttpResponseRedirect('/')
