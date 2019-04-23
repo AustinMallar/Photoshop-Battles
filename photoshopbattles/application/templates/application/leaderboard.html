@@ -8,16 +8,18 @@
 
     <div class="row justify-content-sm-center">
         <div class="col-sm-8">
-            <h3 class="recent-battles-heading">Leaderboards</h3>
+            <h2 class="recent-battles-heading">Leaderboards</h3>
             <div class="card-body">
-            <!---->
-
-
-
-
-
-
-            <!---->
+                <h3>Top Replies</h3>
+                {% for reply in replies %}
+                    {% include 'application/top_reply.html' %}
+                {% endfor %}
+            </div>
+            <div class="card-body">
+                <h3>Top Users</h3>
+                {% for profile in profiles %}
+                    {% include 'application/top_user.html' %}
+                {% endfor %}
             </div>
         </div>
     </div>

@@ -6,7 +6,7 @@ from django.views import generic
 from django.utils import timezone
 from .models import Post, Reply, Liked, Favourite
 from .forms import NewPost, NewReply
-
+from accounts.models import Profile
 
 def IndexView(request):
 
@@ -44,7 +44,12 @@ def IndexView(request):
         return render(request, 'application/home.html', context)
 
 def leaderboard_view(request):
-    return render(request, 'application/leaderboard.html')
+    context = {}
+    latest_replies = Reply.objects.all().order_by('-pub_date')[:3]
+    context['replies'] = latest_replies
+    latest_Profiles = Profile.objects.all()[:3]
+    context['profiles'] = latest_Profiles
+    return render(request, 'application/leaderboard.html', context)
 
 def profile_view(request):
     return render(request, 'application/profile.html')
