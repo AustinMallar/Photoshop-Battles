@@ -12,23 +12,23 @@ The publicly available URL for this project is http://add34812.ngrok.io/
 
 # Features
 
-# Account Creation
+## Account Creation
 
 User can create an account using a username and password. Accounts consist of a user profile image and a biography. It will also track all posts and replies.
 
-# Starting Battles
+## Starting Battles
 
 User's may start a battle by using the button on the navigation menu at the top of the site. Battles require a title and a starting image. At any point a user may delete their post.
 
-# Posting Replies
+## Posting Replies
 
 User's may reply to a battle and add an additional image which other users can like. At any point a user may delete their reply.
 
-# Liking Replies
+## Liking Replies
 
 User's may like a reply to a post. These likes will be tracked for leaderboard purposes. At any point a user unlike a reply.
 
-# Leaderboard
+## Leaderboard
 
 The leader keeps track of the most liked replies and accounts with the highest number of likes.
 
