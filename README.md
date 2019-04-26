@@ -34,6 +34,7 @@ The leader keeps track of the most liked replies and accounts with the highest n
 
 ### Austin-2-factor Authentication Login
 
+Two factor authentication using phone number working.
 
 ### OpenStack Structure
 
@@ -56,5 +57,10 @@ Spins up a Docker container running Jenkins on port 8080.
 * ./ngrok http 8000
 
 
+## Example Data
 
+* https://old.reddit.com/r/photoshopbattles/comments/bhab4d/psbattle_cat_through_a_window/
+* https://old.reddit.com/r/photoshopbattles/comments/bh3z6u/psbattle_tiger_in_the_snow/
+* https://old.reddit.com/r/photoshopbattles/comments/bhahbr/psbattle_this_knight_riding_the_subway/
+* https://old.reddit.com/r/photoshopbattles/comments/bh1skh/psbattle_this_woman_spraying_her_yard_for_pests/
 
