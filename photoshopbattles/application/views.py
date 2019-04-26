@@ -46,10 +46,9 @@ def IndexView(request):
 
 def leaderboard_view(request):
     context = {}   
-    latest_Profiles = Profile.objects.all()[:3]
+    latest_Profiles = Profile.objects.all()
     # Code for sorting list of objects https://stackoverflow.com/questions/403421/how-to-sort-a-list-of-objects-based-on-an-attribute-of-the-objects
-    sorted_profiles = sorted(latest_Profiles, key=lambda x: x.total_number_likes(), reverse=True)
-
+    sorted_profiles = sorted(latest_Profiles, key=lambda x: x.total_number_likes(), reverse=True)[:3]
 
     #Sorting code referenced from https://stackoverflow.com/questions/2501149/order-by-count-of-a-foreignkey-field
     top_replies = Reply.objects.annotate(num_likes = Count('liked')).order_by('-num_likes')[:3]
