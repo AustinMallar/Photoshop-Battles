@@ -2,15 +2,34 @@
 
 A Django web application where users can submit photos to be photoshopped by other users. Photoshops will be voted on to determine the winner.
 
-The publicly available URL for this project is http://add34812.ngrok.io/
-
 ## Authors
 
 * **Austin Mallar**
 * **Cameron Fisher**
 * **Priya Kaira**
 
-# Features
+## Accessing the Application
+
+When using the CISVPN, the web application is available for viewing on the IP address http://172.30.14.42
+
+Initially, the web application was available on a public URL (http://add34812.ngrok.io/), but because of the limitations of the free ngrok account, the tunnel times out after a few hours.
+
+**Usage:**
+
+`git clone https://cisgitlab.ufv.ca/201901COMP351AB1g10/webdesign-project.git` <br/>
+`cd photoshopbattles` <br/>
+
+*[Creating virtual environment]* <br/>
+`virtualenv -p <python3_path> venv` <br/>
+`source venv/bin/activate` <br/>
+`pip install -r requirements.txt` <br/>
+
+*[To start the backend]* <br/>
+`python manage.py runserver 8080` <br/>
+
+Go to http://127.0.0.1:8080/
+
+## Features
 
 ### Account Creation
 
@@ -63,4 +82,3 @@ Spins up a Docker container running Jenkins on port 8080.
 * https://old.reddit.com/r/photoshopbattles/comments/bh3z6u/psbattle_tiger_in_the_snow/
 * https://old.reddit.com/r/photoshopbattles/comments/bhahbr/psbattle_this_knight_riding_the_subway/
 * https://old.reddit.com/r/photoshopbattles/comments/bh1skh/psbattle_this_woman_spraying_her_yard_for_pests/
-
