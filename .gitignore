@@ -4,3 +4,8 @@ env/
 photoshopbattles/photoshopbattles/__pycache__/
 photoshopbattles/application/__pycache__/
 photoshopbattles/accounts/__pycache__/
+photoshopbattles/accounts/migrations
+photoshopbattles/application/migrations
+photoshopbattles/db.sqlite3
+production-settings
+ngrok
